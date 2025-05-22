@@ -12,10 +12,9 @@ import {
   isFuture,
 } from "date-fns";
 
-import { CloudDownload } from "lucide-react";
 import React, { useEffect, useState, useCallback } from "react";
 import Modal from "./Modal";
-import useStore from "../store/useStore";
+import useCalendarStore from "../store/useCalendarStore";
 
 const Calendar = ({ userRole }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -24,7 +23,7 @@ const Calendar = ({ userRole }) => {
     setSelectedDate,
     backupDates,
     // Placeholder for backend logic: fetch backup dates from API
-  } = useStore();
+  } = useCalendarStore();
 
   const fetchDates = useCallback(() => {
     // Placeholder for backend logic: fetch backup dates from API
@@ -55,13 +54,7 @@ const Calendar = ({ userRole }) => {
   const backupSet = new Set(backupDates || []); // Frontend: backup set to show backups on the calendar
 
   return (
-    <div className="bg-gradient-to-b from-blue-300 via-blue-100 to-white">
-      <div className="flex items-center justify-center pt-6 pb-2 gap-x-2">
-        <div className=" ">
-          <CloudDownload className="h-10 w-10 text-black" />
-        </div>
-        <h2 className="text-2xl font-bold text-gray-900">Welcome to Backup Sync</h2>
-      </div>
+    <div className="bg-gradient-to-b from-blue-300 via-blue-100 to-white p-20">
       <div className="max-w-lg mx-auto bg-gradient-to-b from-sky-200 via-sky-50 to-white border shadow-lg rounded-lg p-8">
         <div className="flex justify-between items-center mb-2 border border-gray-400 rounded-lg p-2">
           <button onClick={prevYear} className="px-3 py-1 bg-gray-400 rounded cursor-pointer">«</button>

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const useStore = create((set) => ({
+const useCalendarStore = create((set) => ({
   selectedDate: null,
   backupDates: new Set(),
 
@@ -21,4 +21,4 @@ const useStore = create((set) => ({
   },
 }));
 
-export default useStore;
+export default useCalendarStore;

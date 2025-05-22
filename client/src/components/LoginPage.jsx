@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CloudDownload } from "lucide-react";
 import { loginUser } from "../services/api";
+import useAuthStore from "../store/useAuthStore"; // ✅ Import Zustand store
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -9,6 +10,7 @@ export default function LoginPage() {
   const [role, setRole] = useState("user");
   const [error, setError] = useState("");
 
+  const { login } = useAuthStore(); // ✅ Zustand login
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -21,13 +23,19 @@ export default function LoginPage() {
 
     try {
       const res = await loginUser({ username, password, role });
+
       if (res.token) {
         if (res.userRole !== role) {
           setError("Selected role does not match user role.");
           return;
         }
-        localStorage.setItem("token", res.token);
-        localStorage.setItem("userRole", res.userRole);
+
+        login({
+          token: res.token,
+          userRole: res.userRole,
+          username: username,
+        });
+
         navigate("/calendar");
       } else {
         setError(res.message || "Invalid credentials");
