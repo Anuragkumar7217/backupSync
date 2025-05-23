@@ -1,5 +1,5 @@
 import React from "react";
-import { CloudDownload, CircleUser } from "lucide-react";
+import { CloudDownload, CircleUser, LogOut } from "lucide-react";
 import useAuthStore from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 
@@ -25,9 +25,10 @@ export default function Header() {
       </div>
       <button
         onClick={handleLogout}
-        className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm font-medium"
+        className="bg-red-500 hover:bg-red-600 px-2 py-0.5 rounded text-sm font-semibold flex items-center space-x-1"
       >
-        Logout
+        <LogOut className="w-5 h-5" />
+        <span>Logout</span>
       </button>
     </header>
   );
